@@ -1,5 +1,6 @@
 import os
 import shutil
+from utils import progressbar
 
 def get_grav_md_page_content(page_name):
     return f'---\ntitle: {page_name}\n---\n'
@@ -29,35 +30,56 @@ def find_pages():
     return pages
 
 def create_grav_md_pages(pages):
+    print('Creating markdown pages...')
+    index = 0
+
     for _, page in pages.items():
         dir_name = page['dir']
         page_name = page['page']
         grav_page_content = get_grav_md_page_content(page_name)
         
+        progressbar(index, len(pages), '')
+        print()
+
         os.mkdir(f'project-output/user/pages/{dir_name}')
         with open(f'project-output/user/pages/{dir_name}/{page_name}', 'w') as file:
             file.write(grav_page_content)
             file.close()
-        
+    
+    print('OK')
 
 def create_grav_template_pages(pages):
+    print('Creating template pages...')
+    index = 0
+
     for _, page in pages.items():
         template_name = page['template']
         page_name = page['src_name']
         
+        progressbar(index, len(pages), '')
+        print()
+
         shutil.copy(f'project/public/{page_name}', f'project-output/user/themes/project-theme/templates/{template_name}')
     
+    print('OK')
+
 def create_grav_pages(pages):
     create_grav_md_pages(pages)
     create_grav_template_pages(pages)
 
 def build_pages_dict(pages_names):
     pages = {}
-    for page_name in pages_names:
+
+    print('Building pages dictionary...')
+
+    for index, page_name in enumerate(pages_names):
         grav_page_index = int(page_name.split('-')[0])
         grav_page_dir = to_grav_dir_name(page_name)
         grav_page_name = to_grav_page_name(page_name)
         grav_template_name = to_grav_template_name(page_name)
+
+        progressbar(index, len(pages_names), '')
+        print()
 
         if grav_page_index in pages:
             shutil.rmtree(f'project-output')
@@ -69,10 +91,21 @@ def build_pages_dict(pages_names):
                 'page': grav_page_name,
                 'template': grav_template_name
             }
+
+    print('OK')
+
     return pages
+
+def log_pages(pages):
+    print('Pages:')
+    for _, page in pages.items():
+        print(f'{page["src_name"]} -> {page["dir"]}/{page["page"]} -> {page["template"]}')
+
+    print('Total pages:', len(pages))
 
 def create_pages():
     pages_names = find_pages()
     pages = build_pages_dict(pages_names)
     create_grav_pages(pages)
+    log_pages(pages)
     return pages
