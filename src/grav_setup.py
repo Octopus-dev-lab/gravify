@@ -94,6 +94,9 @@ def remove_default_files():
     print('Removing project-output/user/themes/project-theme/css/custom.css...', end=' ')
     os.remove('project-output/user/themes/project-theme/css/custom.css')
     print('OK')
+    print('Removing project-output/user/themes/project-theme/images/logo.png...', end=' ')
+    os.remove('project-output/user/themes/project-theme/images/logo.png')
+    print('OK')
 
 
 def setup_grav():
