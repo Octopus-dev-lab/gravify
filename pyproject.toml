@@ -3,7 +3,7 @@ package-mode = false
 name = "gravify"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Jurgen Alla <jurgen.alla.cs@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 
