@@ -63,6 +63,8 @@ def set_theme_as_default():
         f.close()
 
     yaml = yaml.replace('quark', 'project-theme')
+    yaml = yaml.replace('markdown: true', 'markdown: false')
+    yaml = yaml.replace('twig: false', 'twig: true')
 
     with open('user/config/system.yaml', 'w') as f:
         f.write(yaml)
@@ -70,6 +72,7 @@ def set_theme_as_default():
 
     os.chdir('..')
     print('OK')
+
 
 def setup_theme():
     install_grav_devtools()
