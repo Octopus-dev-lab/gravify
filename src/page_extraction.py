@@ -45,7 +45,7 @@ def create_grav_template_pages(pages):
         template_name = page['template']
         page_name = page['src_name']
         
-        shutil.copy(f'project/public/{page_name}', f'project-output/user/themes/project-theme/templates/{template_name}.html.twig')
+        shutil.copy(f'project/public/{page_name}', f'project-output/user/themes/project-theme/templates/{template_name}')
     
 def create_grav_pages(pages):
     create_grav_md_pages(pages)
