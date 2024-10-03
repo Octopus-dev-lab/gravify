@@ -9,3 +9,4 @@ if __name__ == '__main__':
     setup_grav()
     pages = create_pages()
     pages_templates = template_pages(pages)
+    distribute_files(pages_templates)
