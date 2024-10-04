@@ -96,16 +96,30 @@ def build_pages_dict(pages_names):
 
     return pages
 
+def update_root_page(root_page):
+    system_file = ''
+    with open(f'project-output/user/config/system.yaml', 'r') as file:
+        system_file = file.read()
+        file.close()
+    
+    system_file = system_file.replace('/home', f'/{root_page}')
+    
+    with open(f'project-output/user/config/system.yaml', 'w') as file:
+        file.write(system_file)
+        file.close()
+
 def log_pages(pages):
     print('Pages:')
     for _, page in pages.items():
-        print(f'{page["src_name"]} -> {page["dir"]}/{page["page"]} -> {page["template"]}')
+        print(f'{page['src_name']} -> {page['dir']}/{page['page']} -> {page['template']}')
 
     print('Total pages:', len(pages))
 
 def create_pages():
     pages_names = find_pages()
     pages = build_pages_dict(pages_names)
+    root_page = pages[1]['page'].split('.')[0]
+    update_root_page(root_page)
     create_grav_pages(pages)
     log_pages(pages)
     return pages
