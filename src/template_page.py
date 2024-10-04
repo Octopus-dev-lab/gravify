@@ -27,7 +27,8 @@ def template_pages(pages):
             tree = etree.fromstring(html, parser)
             twig_fields = template_twig_fields(tree)
             theme_fields = template_theme_fields(tree)
-            pages_templates[page["template"]] = {
+            page_name = page['template'].split('.')[0]
+            pages_templates[page_name] = {
                 'theme': theme_fields,
                 'editable': twig_fields
             }
