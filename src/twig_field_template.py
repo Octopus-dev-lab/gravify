@@ -151,7 +151,8 @@ def template_a_field(tag):
         'content': '' if tag.text is None else tag.text
     }
     tag.attrib['href'] = to_twig_variable_ref(field_name + '_href')
-        
+    
+    return field    
 
 def template_text_field(tag):
     field_name = tag.get('twig')
