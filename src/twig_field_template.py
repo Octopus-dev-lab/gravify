@@ -39,13 +39,13 @@ def template_assets_fields(tree):
     return assets_fields
 
 def to_twig_media_ref(var_name):
-    return f"{{{{url((media[(page.header.{var_name}|first).name]).url)}}}}"
+    return f"{{{{url((media[page.header.{var_name}]).url)}}}}"
 
 def to_twig_variable_ref(var_name):
     return f'{{{{page.header.{var_name}}}}}'
 
 def to_twig_boolean_ref(var_name, tag_name):
-    return f'{{%if page.header.{var_name} %}}tag_name{{% endif %}}'
+    return f'{{%if page.header.{var_name} %}}{tag_name}{{% endif %}}'
 
 def template_title_field(tag):
     field_name = tag.get('twig')
