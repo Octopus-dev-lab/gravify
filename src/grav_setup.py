@@ -6,9 +6,10 @@ from utils import progressbar
 
 def download_grav():
     print('Checking for Grav...', end=' ')
+    
     if not os.path.exists('grav.zip'):
         print('\nGrav not found. Downloading...', end=' ')
-        os.system('wget https://getgrav.org/download/core/grav-admin/1.7.46 -O grav.zip')
+        os.system('wget https://getgrav.org/download/core/grav-admin/latest -O grav.zip')
         
     print('OK')
 
