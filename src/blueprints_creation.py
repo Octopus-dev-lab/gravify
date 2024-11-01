@@ -205,16 +205,16 @@ def build_blueprint(page, twig_fields):
     blueprint['form']['fields'].update({**header_fields, **body_fields})
     return blueprint
 
-def create_blueprint(page, blueprint):
+def write_blueprint(page, blueprint):
     with open(f'project-output/user/themes/project-theme/blueprints/{page}.yaml', 'w') as file:
         yaml.dump(blueprint, file, sort_keys=False)
 
-def build_blueprints(template_pages):
-    print('Creating blueprints')
+def create_blueprints(template_pages):
+    print('Creating blueprints:')
     os.mkdir('project-output/user/themes/project-theme/blueprints')
 
     for page, data in template_pages.items():
         print(f'- {page}.yaml')
         twig_fields = data['editable']
         blueprint = build_blueprint(page, twig_fields)
-        create_blueprint(page, blueprint)
+        write_blueprint(page, blueprint)
